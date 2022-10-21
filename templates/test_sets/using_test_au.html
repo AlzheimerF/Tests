@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tests }}{% endblock %}
+
+{% block content %}
+<h1>Название теста: {{ tests }}</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+{% for test in questions_and_answers %}
+    <h3>Вопрос{{ test.id }}:</h3>
+    <h2>{{ test.title }}</h2>
+    <input type="text" name="Answer{{ test.id }}" placeholder="Answer" required>
+    {% endfor %}
+   <p><button type="submit">Check results</button></p>
+</form>
+{% if points or unpoints %}
+    <p>Количество правильных ответов: {{ points }} ({{ correct_answers }})</p>
+    <p>Количество неправильных ответов: {{ unpoints }} ({{ wrong_answers }})</p>
+    <p>Процент правильных ответов равен: {{ proccent }} % .</p>
+{% endif %}
+<a href="/admin/"><button>Добавить вопросы к тесту</button></a>
+{% endblock %}

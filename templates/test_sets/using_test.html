@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tests }}{% endblock %}
+
+{% block content %}
+<h1>Название теста: {{ tests }}</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    {% if not questions_and_answers %}
+    <h1>Вопросы отсутствут! Вам нужно их добавить! </h1>
+    {% else %}
+{% for test in questions_and_answers %}
+    <h2>Вопрос: {{ test.title }}</h2>
+    <input type="text" name="Answer{{ test.id }}" placeholder="Answer" required>
+    {% endfor %}
+   <p><button type="submit">Check results</button></p>
+</form>
+{% if points or unpoints %}
+    <p>Количество правильных ответов: {{ points }} ({{ correct_answers }})</p>
+    <p>Количество неправильных ответов: {{ unpoints }} ({{ wrong_answers }})</p>
+    <p>Процент правильных ответов равен: {{ proccent }} % .</p>
+{% endif %}
+{% endif %}
+<a href="/create_answer_and_question/">Добавить вопросы к тесту</a>
+
+{% endblock %}

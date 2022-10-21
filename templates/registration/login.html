@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Логинка{% endblock %}
+
+{% block content %}
+<form action="" method="POST">
+   {% csrf_token %}
+   {{ form.as_p }}
+  <button type="submit">Логин</button>
+</form>
+{% endblock %}

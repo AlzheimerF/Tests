@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Список QA{% endblock %}
+
+{% block content %}
+{% for q in qa%}
+<div>
+  <p>Название теста: {{ q.test }}, Вопрос: {{ q.title }}, Ответ: {{ q.correct_answer }} </p>
+  {% if user.is_authenticated %}
+  <a href="{% url 'delete_qa' q.id %}"><button>Удалить вопрос</button></a>
+  {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

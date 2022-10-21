@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Список тестов{% endblock %}
+
+{% block content %}
+
+<h2>Список общедоступных тестов</h2>
+    {% for test in tests %}
+<div>
+   <p>{{ test.id }}. <a href="/test/{{ test.id }}">{{ test }}</a></p>
+     {% if user.is_authenticated %}
+    <a href="{% url 'delete_test' test.id %}"><button>Удалить</button></a>
+     {% endif %}
+</div>
+    {% endfor %}
+<h2>Список тестов для авторизованных пользователей </h2>
+ {% if user.is_authenticated %}
+    {% for test in tests_au %}
+<div>
+    <p>{{ test.id }}. <a href="/test_au/{{ test.id }}">{{ test }}</a></p>
+</div>
+    {% endfor %}
+{% else %}
+<h1> Для получения списка тестов для авторизованных пользователей нужно АВТОРИЗОВАТЬСЯ ! </h1>
+{% endif %}
+
+{% endblock %}

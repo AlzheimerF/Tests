@@ -1,0 +1,5 @@
+.idea
+ql.service - MySQL Community Server
+tarting mysql.service
+tests/migrations
+venv

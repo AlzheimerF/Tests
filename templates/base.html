@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <a href="{% url 'list_' %}"><button>Главная</button></a>
+    <a href="{% url 'list_u' %}"><button>Список всех пользователей</button></a>
+    <button><a href="/list_qa/">Список вопросов и ответов</a></button>
+    {% if user.is_authenticated %}
+    Здравствуйте, {{ user.username }} !
+    <button><a href="/create_test_set/">Создать Тест</a></button>
+    <button><a href="/create_answer_and_question/">Добавить вопросы к тестам</a></button>
+    <a href="/logout"><button>Выйти из аккаунта</button></a>
+    {% else %}
+    <a href="/register/"><button>Зарегистрироваться</button></a>
+    <a href="/login/"><button>Авторизоваться</button></a>
+    {% endif %}
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>
