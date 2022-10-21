@@ -3,12 +3,23 @@
 {% block title %}Список QA{% endblock %}
 
 {% block content %}
+  <h1>Вопросы для всех пользователей: </h1>
+{% if not qa %}
+<h2> Вопросов нет !</h2>
+{% else %}
 {% for q in qa%}
 <div>
   <p>Название теста: {{ q.test }}, Вопрос: {{ q.title }}, Ответ: {{ q.correct_answer }} </p>
   {% if user.is_authenticated %}
   <a href="{% url 'delete_qa' q.id %}"><button>Удалить вопрос</button></a>
   {% endif %}
-</div>
 {% endfor %}
+{% endif %}
+  {% if user.is_authenticated %}
+  <h1>Вопросы для авторизованных пользователей: </h1>
+  {% for qu in qa_au %}
+      <p>Название теста: {{ qu.test }}, Вопрос: {{ qu.title }}, Ответ: {{ qu.correct_answer }} </p>
+  {% endfor %}
+  {% endif %}
+</div>
 {% endblock %}
