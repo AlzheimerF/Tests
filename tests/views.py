@@ -106,7 +106,9 @@ def list_of_users(request):
 def list_qa(request):
     context = {}
     qa = Questions_and_answers.objects.all()
+    qa_au = QAAU.objects.all()
     context['qa'] = qa
+    context['qa_au'] = qa_au
     return render(request, 'test_sets/list_qa.html', context=context)
 
 def delete_test(request, id):
